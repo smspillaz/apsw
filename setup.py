@@ -230,7 +230,7 @@ class fetch(Command):
         # work out the version
         if self.version is None:
             write("  Getting download page to work out current SQLite version")
-            page=self.download("https://sqlite.org/download.html", text=True, checksum=False)
+            page=self.download("http://sqlite.org/download.html", text=True, checksum=False)
             match=re.search(r'sqlite-amalgamation-3([0-9][0-9])([0-9][0-9])([0-9][0-9])\.zip', page)
             if match:
                 self.version="3.%d.%d.%d" % tuple([int(match.group(n)) for n in range(1,4)])
@@ -273,13 +273,13 @@ class fetch(Command):
                         write("eg  fossil-3a82c8e6", sys.stderr)
                         sys.exit(18)
 
-                AURL="https://sqlite.org/src/zip/sqlite3.zip?uuid="+uuid
+                AURL="http://sqlite.org/src/zip/sqlite3.zip?uuid="+uuid
                 checksum=False
             else:
                 if sys.platform=="win32":
-                    AURL="https://sqlite.org/sqlite-amalgamation-%s.zip" % (self.webversion,)
+                    AURL="http://sqlite.org/sqlite-amalgamation-%s.zip" % (self.webversion,)
                 else:
-                    AURL="https://sqlite.org/sqlite-autoconf-%s.tar.gz" % (self.webversion,)
+                    AURL="http://sqlite.org/sqlite-autoconf-%s.tar.gz" % (self.webversion,)
                 checksum=True
 
             AURL=fixup_download_url(AURL)
